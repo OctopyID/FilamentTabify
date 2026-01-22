@@ -1,42 +1,42 @@
 {
-	"$schema": "https://getcomposer.org/schema.json",
-	"name": "octopyid/filament-tabify",
-	"description": "Filament widget tabs made easy — keep your dashboard tidy",
-	"type": "library",
-	"license": "MIT",
-	"authors": [
-		{
-			"name": "Supian M",
-			"email": "supianidz@octopy.dev"
-		}
-	],
-	"require": {
-		"php": "^8.2",
-		"filament/filament": "^4|^5"
-	},
-	"autoload": {
-		"psr-4": {
-			"Octopy\\Filament\\Tabify\\": "src/"
-		}
-	},
-	"autoload-dev": {
-		"psr-4": {
-			"Octopy\\Tests\\": "tests/"
-		}
-	},
-	"scripts": {
-		"test": "vendor/bin/testbench package:test"
-	},
-	"extra": {
-		"laravel": {
-			"providers": [
-				"Octopy\\Filament\\Tabify\\Providers\\TabifyServiceProvider"
-			]
-		}
-	},
-	"config": {
-		"sort-packages": true
-	},
-	"minimum-stability": "dev",
-	"prefer-stable": true
+    "$schema": "https://getcomposer.org/schema.json",
+    "name": "octopyid/filament-tabify",
+    "description": "Transform your Filament dashboard with elegant Tabbed Widgets",
+    "keywords": [
+        "laravel", "filament", "filament-plugin", "widgets", "tabs", "dashboard"
+    ],
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Supian M",
+            "email": "supianidz@octopy.dev"
+        }
+    ],
+    "require": {
+        "php": "^8.2",
+        "filament/filament": "^4|^5"
+    },
+    "autoload": {
+        "psr-4": {
+            "Octopy\\Filament\\Tabify\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Octopy\\Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Octopy\\Filament\\Tabify\\Providers\\TabifyServiceProvider"
+            ]
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }
