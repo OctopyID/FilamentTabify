@@ -1,0 +1,18 @@
+# Package
+/yarn.lock export-ignore
+/package.json export-ignore
+/composer.lock export-ignore
+
+# Tests
+/tests export-ignore
+/phpunit.xml export-ignore
+
+# Config
+/.nvmrc export-ignore
+/.yarnrc.yml export-ignore
+/.gitignore export-ignore
+/.editorconfig export-ignore
+/.gitattributes export-ignore
+
+# Github
+/.github export-ignore

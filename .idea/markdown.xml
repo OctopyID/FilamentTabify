@@ -2,7 +2,6 @@
 <project version="4">
   <component name="MarkdownSettings">
     <option name="customStylesheetText" value="* {&#10;    font-family: &quot;Iosevka Nerd Font Mono&quot;, monospace;&#10;}" />
-    <option name="useCustomStylesheetPath" value="true" />
     <option name="useCustomStylesheetText" value="true" />
   </component>
 </project>
