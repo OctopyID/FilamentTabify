@@ -23,9 +23,8 @@
             $attributes->grid($this->getColumns())->class(['fi-wi-widget mt-4 gap-6']),
         }}
     >
-        @foreach($this->getActiveWidgets() as $widget)
-            @livewire($widget)
+        @foreach($this->getActiveWidgets() as $index => $widget)
+            @livewire($widget, key($activeTab . '-' . $index))
         @endforeach
     </div>
-
 </x-filament-widgets::widget>
