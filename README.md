@@ -82,6 +82,19 @@ class ListOrders extends \Filament\Resources\Pages\ListRecords
 }
 ```
 
+### Interacting with Widgets
+
+If you need to interact with all widgets within the tabs, for example to dispatch an event to them, you can use the `getAllWidgets()` method.
+
+```php
+public function updatedYear()
+{
+    foreach ($this->getAllWidgets() as $widget) {
+        $this->dispatch('updateYear', $this->year)->to($widget);
+    }
+}
+```
+
 ### Customizing the Widget's Grid
 
 You can customize the number of columns in the widget's grid by overriding the `getColumns()` method.
@@ -128,7 +141,7 @@ Please see [releases](https://github.com/OctopyID/FilamentTabify/releases) for m
 
 ## Security Vulnerabilities
 
-If you discover a security vulnerability within this package, please send an e-mail to Supian M via [supianidz@octopy.dev](mailto:supianidz@octopy.dev). All security
+If you discover a security vulnerability within this package, please send an e-mail to Supian M via [bug@octopy.dev](mailto:supianidz@octopy.dev). All security
 vulnerabilities will be promptly addressed.
 
 ## Credits
