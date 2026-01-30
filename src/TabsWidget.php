@@ -13,9 +13,12 @@ abstract class TabsWidget extends Widget
     /**
      * @var string|null
      */
-    #[Url(as: 'tab', except: null)]
+    #[Url(as: 'tab-widget', except: null)]
     public string|null $activeTab = null;
 
+    /**
+     * @var Collection<string, Tab>|null
+     */
     protected Collection|null $cachedTabs = null;
 
     /**
@@ -24,15 +27,7 @@ abstract class TabsWidget extends Widget
     protected string $view = 'tabify::tabs';
 
     /**
-     * @return int|array
-     */
-    public function getColumns() : int|array
-    {
-        return 2;
-    }
-
-    /**
-     * @return array<string | int, Tab>
+     * @return array<int, Tab>
      */
     public function getTabs() : array
     {
@@ -40,64 +35,11 @@ abstract class TabsWidget extends Widget
     }
 
     /**
-     * @return Collection<string | int, Tab>
+     * @return int|array<string, int>
      */
-    public function getCachedTabs() : Collection
+    public function getColumns() : int|array
     {
-        return
-            $this->cachedTabs ??=
-                collect($this->getTabs())
-                    ->mapWithKeys(function (Tab $tab, string|int $key) : array {
-                        return [
-                            $tab->getKey() => $tab->hasCustomLabel() ? $tab : $tab->label($this->generateTabLabel($key)),
-                        ];
-                    });
-    }
-
-    /**
-     * @return string|int|null
-     */
-    public function getDefaultActiveTab() : string|int|null
-    {
-        return $this->getCachedTabs()->keys()->first();
-    }
-
-    /**
-     * @return array
-     */
-    public function getActiveWidgets() : array
-    {
-        return $this->getActiveTab()->getDefaultChildComponents();
-    }
-
-    /**
-     * @return array<int, Widget>
-     */
-    public function getAllWidgets() : array
-    {
-        $widgets = [];
-        foreach ($this->getCachedTabs() as $tab) {
-            $widgets = array_merge($widgets, $tab->getDefaultChildComponents());
-        }
-
-        return array_unique($widgets);
-    }
-
-    /**
-     * @return Tab
-     */
-    public function getActiveTab() : Tab
-    {
-        /**
-         * @var Collection<string, Tab> $tabs
-         */
-        $tabs = $this->getCachedTabs();
-
-        if ($tabs->has($this->activeTab)) {
-            return $tabs->get($this->activeTab);
-        }
-
-        return $tabs->get($this->getDefaultActiveTab());
+        return 2;
     }
 
     /**
@@ -116,6 +58,7 @@ abstract class TabsWidget extends Widget
     public function isActiveTab(string $key) : bool
     {
         $active = $this->activeTab;
+
         if (blank($active)) {
             $active = $this->getDefaultActiveTab();
         }
@@ -124,11 +67,73 @@ abstract class TabsWidget extends Widget
     }
 
     /**
-     * @param  string $key
+     * @return string|int|null
+     */
+    public function getDefaultActiveTab() : string|int|null
+    {
+        return $this->getCachedTabs()->keys()->first();
+    }
+
+    /**
+     * @return Tab
+     */
+    public function getActiveTab() : Tab
+    {
+        /** @var Collection<string, Tab> $tabs */
+        $tabs = $this->getCachedTabs();
+
+        if ($this->activeTab && $tabs->has($this->activeTab)) {
+            return $tabs->get($this->activeTab);
+        }
+
+        return $tabs->get($this->getDefaultActiveTab());
+    }
+
+    /**
+     * @return array<int, mixed>
+     */
+    public function getActiveWidgets() : array
+    {
+        return $this->getActiveTab()->getDefaultChildComponents();
+    }
+
+    /**
+     * @return array<int, mixed>
+     */
+    public function getAllWidgets() : array
+    {
+        $widgets = [];
+
+        foreach ($this->getCachedTabs() as $tab) {
+            $widgets = array_merge($widgets, $tab->getDefaultChildComponents());
+        }
+
+        return array_unique($widgets);
+    }
+
+    /**
+     * @return Collection<string, Tab>
+     */
+    public function getCachedTabs() : Collection
+    {
+        if ($this->cachedTabs !== null) {
+            return $this->cachedTabs;
+        }
+
+        return $this->cachedTabs = collect($this->getTabs())
+            ->mapWithKeys(function (Tab $tab, string|int $key) : array {
+                return [
+                    $tab->getKey() => $tab->hasCustomLabel() ? $tab : $tab->label($this->generateTabLabel($key)),
+                ];
+            });
+    }
+
+    /**
+     * @param  string|int $key
      * @return string
      */
-    protected function generateTabLabel(string $key) : string
+    protected function generateTabLabel(string|int $key) : string
     {
-        return (string) str($key)->replace(['_', '-'], ' ')->ucfirst();
+        return (string) str((string) $key)->replace(['_', '-'], ' ')->ucfirst();
     }
 }
