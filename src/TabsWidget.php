@@ -71,6 +71,19 @@ abstract class TabsWidget extends Widget
     }
 
     /**
+     * @return array<int, Widget>
+     */
+    public function getAllWidgets() : array
+    {
+        $widgets = [];
+        foreach ($this->getCachedTabs() as $tab) {
+            $widgets = array_merge($widgets, $tab->getDefaultChildComponents());
+        }
+
+        return array_unique($widgets);
+    }
+
+    /**
      * @return Tab
      */
     public function getActiveTab() : Tab
