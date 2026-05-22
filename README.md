@@ -1,4 +1,4 @@
-<p align="center">
+<p align="center" class="filament-hidden">
     <img src="https://img.shields.io/packagist/v/octopyid/filament-tabify.svg?style=for-the-badge" alt="Version">
     <img src="https://img.shields.io/packagist/dt/octopyid/filament-tabify.svg?style=for-the-badge&color=F28D1A" alt="Downloads">
     <img src="https://img.shields.io/packagist/l/octopyid/filament-tabify.svg?style=for-the-badge" alt="License">
